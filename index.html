@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Southwest Airlines | Inflight Entertainment Trivia</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<style>
+  body {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    background: #f6f6f6;
+    word-break: normal;
+    -webkit-text-size-adjust: none;
+    mso-cellspacing: 0px;
+    mso-padding-alt: 0px 0px 0px 0px;
+  }
+
+  a {
+    color: #f6f6f6 !important;
+    text-decoration: none;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  p {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  img {
+    -ms-interpolation-mode: bicubic;
+    /* Allow smoother rendering of resized image in Internet Explorer */
+  }
+
+  table {
+    mso-cellspacing: 0px;
+    mso-padding-alt: 0px 0px 0px 0px;
+  }
+
+  section {
+    background: #f6f6f6;
+    overflow-y: hidden;
+  }
+
+  .quiz-body {
+    background: #304cb2;
+    border-radius: 10px;
+    color: #fff;
+    padding: 5px 15px;
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto 100px;
+  }
+
+  .text-container {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .quiz-options {
+    margin: 20px 0;
+  }
+
+  [type="radio"] {
+    border: 0;
+    height: 0.05rem;
+    width: 0.05rem;
+    position: absolute;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    background: #d5152e;
+    margin-bottom: 15px;
+    padding: 6px 0;
+    position: relative;
+    width: 100%;
+    color: #304cb2;
+    font-weight: bold;
+  }
+
+  label:hover .alphabet {
+    background: #ffbf27;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  label .alphabet {
+    border-radius: 5px;
+    padding: 0.4rem 0.5rem 0.4rem;
+    width: 2.3rem;
+    margin: 0 1.3rem 0 0.7rem;
+    display: flex;
+    justify-content: center;
+    background: #304cb2;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  label .icon {
+    height: auto;
+    position: absolute;
+    left: 92%;
+    top: 12px;
+  }
+
+  label .wrong {
+    width: 18px;
+  }
+
+  label .right {
+    width: 22px;
+  }
+
+  .rightanswer:checked+label {
+    background: #ffbf27;
+    color: #304cb2;
+    font-weight: bold;
+  }
+
+  .rightanswer:valid+label {
+    background: #ffbf27;
+    color: #304cb2;
+    font-weight: bold;
+  }
+
+  .rightanswer:checked+label .alphabet {
+    background: #304cb2;
+    color: #fff;
+  }
+
+  .wronganswer:checked+label {
+    background: #d5152e;
+    color: #ffbf27;
+    font-weight: bold;
+  }
+
+  .wronganswer:valid+label {
+    background: #d5152e;
+    color: #ffbf27;
+    font-weight: bold;
+  }
+
+  .wronganswer:checked+label .alphabet {
+    background: #304cb2;
+    color: #fff;
+  }
+
+  .one-a:valid+label {
+    animation: flash 0.6s infinite;
+  }
+
+  .answer__reveal-text {
+    display: none;
+  }
+
+  :valid .answer__reveal-text {
+    display: block;
+  }
+
+  @keyframes flash {
+    0% {
+      background-color: #ffbf27;
+    }
+
+    49% {
+      background-color: #ffbf27;
+    }
+
+    50% {
+      background-color: #ffbf27;
+    }
+
+    99% {
+      background-color: #ffbf27;
+    }
+
+    100% {
+      background-color: #ffbf27;
+    }
+  }
+
+  input:invalid+label {
+    background: #fff;
+  }
+
+  input:invalid+label:hover {
+    background: linear-gradient(to right, #f6f6f6 10%, #fff 80%);
+  }
+
+  input:valid+label {
+    color: #fff;
+    pointer-events: none;
+  }
+
+  form:invalid #btn {
+    pointer-events: none;
+    background: #d5152e;
+  }
+
+  .btn:hover {
+    background: #000;
+    color: #fff;
+  }
+
+  /* MEDIA QUERY */
+  @media (max-width: 480px) {
+    quiz-body {
+      width: 75%;
+    }
+
+    section {
+      background: #f6f6f6;
+    }
+
+    label .alphabet {
+      margin: 0 0.9rem 0 0.7rem;
+    }
+
+    label .right {
+      width: 16px;
+    }
+
+    label .wrong {
+      width: 14px;
+    }
+
+    .over-text-cont h2 {
+      margin-bottom: 40px;
+    }
+
+    .over-text-cont #btn {
+      padding: 3px 0;
+    }
+
+    .refresh-content {
+      display: grid;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 325px) {
+    label {
+      font-size: 0.75rem;
+    }
+
+    label .alphabet {
+      margin: 0 0.55rem 0 0.7rem;
+    }
+
+    label .right {
+      width: 14px;
+    }
+
+    label .wrong {
+      width: 12px;
+    }
+  }
+
+  /* Mobile styles */
+  @media only screen and (max-device-width: 480px),
+  only screen and (max-width: 480px) {
+    table[class="mobile-shell"] {
+      width: 100% !important;
+      min-width: 100% !important;
+    }
+
+    table[class="center"] {
+      margin: 0 auto !important;
+    }
+
+    table[class="left"] {
+      margin-right: auto !important;
+    }
+
+    td[class="td"] {
+      width: 100% !important;
+      min-width: 100% !important;
+    }
+
+    td[class="auto"] {
+      width: 100% !important;
+      min-width: auto !important;
+    }
+
+    div[class="mobile-br-3"] {
+      height: 4px !important;
+      background: #f6f6f6 !important;
+      display: block !important;
+    }
+
+    div[class="mobile-br-4"] {
+      height: 4px !important;
+      background: #2d2d31 !important;
+      display: block !important;
+    }
+
+    div[class="mobile-br-5"] {
+      height: 5px !important;
+    }
+
+    div[class="mobile-br-10"] {
+      height: 10px !important;
+    }
+
+    div[class="mobile-br-15"] {
+      height: 15px !important;
+    }
+
+    div[class="mobile-br-25"] {
+      height: 25px !important;
+    }
+
+    th[class="m-td"],
+    td[class="m-td"],
+    div[class="hide-for-mobile"],
+    span[class="hide-for-mobile"] {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
+      min-height: 0 !important;
+    }
+
+    span[class="mobile-block"] {
+      display: block !important;
+    }
+
+    div[class="img-m-center"] {
+      text-align: center !important;
+    }
+
+    div[class="img-m-left"] {
+      text-align: left !important;
+    }
+
+    div[class="fluid-img"] img,
+    td[class="fluid-img"] img {
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+    }
+
+    div[class="h1"],
+    div[class="slogan"],
+    div[class="h1-left"],
+    div[class="h1-white"],
+    div[class="h1-white-r"],
+    div[class="h1-secondary"],
+    div[class="text-footer"],
+    div[class="text-footer-r"],
+    div[class="text-footer-r2"],
+    div[class="h2-white-m-center"],
+    div[class="h1-white-secondary-r"] {
+      text-align: center !important;
+    }
+
+    th[class="column"],
+    th[class="column-top"],
+    th[class="column-dir-t"],
+    th[class="column-bottom"],
+    th[class="column-dir"] {
+      float: left !important;
+      width: 100% !important;
+      display: block !important;
+    }
+
+    div[class="text-top"] {
+      text-align: center !important;
+    }
+
+    th[class="column-top-black"] {
+      float: left !important;
+      width: 100% !important;
+      display: block !important;
+      background: #2d2d31 !important;
+    }
+
+    td[class="item"] {
+      width: 150px !important;
+    }
+
+    td[class="content-spacing"] {
+      width: 15px !important;
+    }
+
+    td[class="content-spacing-pink"] {
+      width: 15px !important;
+      background: #f6f6f6 !important;
+    }
+  }
+</style>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="content-spacing" style="font-size:0pt; line-height:0pt; text-align:left" bgcolor="#f6f6f6"></td>
+          <td align="center" width="600" class="td" style="width:600px; min-width:600px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; Margin:0">
+            <table width="600" border="0" cellspacing="0" cellpadding="0" class="mobile-shell" bgcolor="#f6f6f6">
+              <tr>
+                <td class="td" style="width:600px; min-width:600px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; Margin:0">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td class="content-spacing" style="font-size:0pt; line-height:0pt; text-align:left" width="1"></td>
+                      <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <th class="column" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; Margin:0">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td class="img" style="font-size:0pt; line-height:0pt; text-align:left">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="spacer" style="font-size:0pt; line-height:0pt; text-align:center; width:100%; min-width:100%; mso-cellspacing:0px; mso-padding-alt:0px 0px 0px 0px">
+                                      <tr>
+                                        <td height="45" class="spacer" style="font-size:0pt; line-height:0pt; text-align:center; width:100%; min-width:100%; mso-cellspacing:0px; mso-padding-alt:0px 0px 0px 0px"></td>
+                                      </tr>
+                                    </table>
+
+                                    <div class="h2-white-center" style="color:#304cb2; font-family: 'Southwest Sans', Arial Black, Arial Bold, Gadget, Trebuchet MS, impact, 'AvenirNextCondensed-Bold', Arial, Helvetica,  sans-serif; font-size:36px; line-height:36px; text-align:center; font-weight:bold;">Inflight Entertainment Trivia</div>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="spacer" style="font-size:0pt; line-height:0pt; text-align:center; width:100%; min-width:100%; mso-cellspacing:0px; mso-padding-alt:0px 0px 0px 0px">
+                                      <tr>
+                                        <td height="35" class="spacer" style="font-size:0pt; line-height:0pt; text-align:center; width:100%; min-width:100%; mso-cellspacing:0px; mso-padding-alt:0px 0px 0px 0px"></td>
+                                      </tr>
+                                    </table>
+
+                                  </td>
+                                </tr>
+                              </table>
+                            </th>
+
+                          </tr>
+                        </table>
+                      </td>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="content-spacing-pink" style="font-size:0pt; line-height:0pt; text-align:left" bgcolor="#f6f6f6"></td>
+        </tr>
+      </table>
+
+      <!-- QUIZ ONE -->
+      <section class="section-1" id="section-1">
+        <div class="quiz-body">
+          <div class="text-container" style="color:#ffbf27; font-family: 'Southwest Sans', Arial Black, Arial Bold, Gadget, Trebuchet MS, Arial, Helvetica,  sans-serif; font-size:28px; line-height:32px; padding-top:20px; text-align:center; font-weight:bold;">
+            Which television series featured a Southwest<span style="font-size: 12px; font-family: Southwest Sans Light, Trebuchet MS, Arial,  Helvetica, sans-serif; color: #ffbf27; font-weight:bold;">®</span> cameo?
+          </div>
+          <form>
+            <div class="quiz-options" style="color: #111b40;font-family: 'Southwest Sans', Arial Black, Arial Bold, Gadget, Trebuchet MS, Arial, Helvetica,  sans-serif; font-size:20px; line-height:24px; padding-top:10px;text-align:center; font-weight:bold;">
+              <input type="radio" class="input-radio one-a rightanswer" id="one-a" name="yes-1" required>
+              <label class="radio-label right" for="one-a">
+                <span class="alphabet">A</span> Seinfeld<span class="answer__reveal-text" style="color:#304cb2; font-family: 'Southwest Sans', Arial Black, Arial Bold, Gadget, Trebuchet MS, Arial, Helvetica, sans-serif; font-size:12px;"><br><br><br>Season 04 Episode 12 | The Airport</span><img class="icon right" src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588518387/jdsjkefkefkefefexco.svg" alt="">
+              </label>
+              <input type="radio" class="input-radio one-b wronganswer" id="one-b" name="yes-1">
+              <label class="radio-label wrong" for="one-b">
+                <span class="alphabet">B</span> Frasier <img class="icon wrong" src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg">
+              </label>
+              <input type="radio" class="input-radio one-c wronganswer" id="one-c" name="yes-1">
+              <label class="radio-label wrong" for="one-c">
+                <span class="alphabet">C</span> The Fresh Prince of Bel-Air <img class="icon wrong" src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg">
+              </label>
+            </div>
+        </div>
+      </section>
+    </td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#304cb2">
+  <tr>
+    <td class="content-spacing" style="font-size:0pt; line-height:0pt; text-align:left" width="1"></td>
+    <td align="center">
+      <table width="600" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
+        <tr>
+          <td class="td" style="width:600px; min-width:600px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; Margin:0">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="spacer" style="font-size:0pt; line-height:0pt; text-align:center; width:100%; min-width:100%; mso-cellspacing:0px; mso-padding-alt:0px 0px 0px 0px">
+              <tr>
+                <td height="40" class="spacer" style="font-size:0pt; line-height:0pt; text-align:center; width:100%; min-width:100%; mso-cellspacing:0px; mso-padding-alt:0px 0px 0px 0px"></td>
+              </tr>
+            </table>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <th class="column-top" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top; Margin:0">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                      <tr>
+                        <td valign="middle" align="center" style="padding: 20px 0px 0px; line-height: 100%;"><img src="https://lcsbckls.com/wp-content/uploads/2022/09/Thank-You-Southwest-Flipboard.gif" alt="Thank You Southwest Flipboard"><br>
+                          <a href="https://lucasbuckels.com/"><img src="https://lcsbckls.com/wp-content/uploads/2022/09/Lucas-Buckels-x-Southwest-Airlines-Logo.png" alt="Lucas Buckels' Logo"></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="center" style="padding-top: 0px; padding-bottom: 0px; padding-left: 20px; padding-right: 20px;">
+                          <table border="0" cellpadding="0" cellspacing="0" align="center">
+                            <tbody>
+                              <tr>
+                                <td valign="top" align="center" style="padding-top:0px;padding-bottom:0px;padding-left:0px;padding-right:0px;vertical-align:top;font-size:0px;text-align:center;">
+
+                              <tr>
+                                <td align="center" style="padding-top: 20px; padding-bottom: 0px; padding-left: 30px; padding-right: 30px;">
+                                  <table border="0" width="100%" cellpadding="0" cellspacing="0" align="center">
+                                    <tbody>
+                                      <tr>
+                                        <td align="center" bgcolor="9babe4" style="padding-top: 0px; padding-bottom: 0px; padding-left: 0px; padding-right: 0px; background-color: #9babe4; font-size: 1px; color: transparent; height: 2px; line-height: 2px;" height="2">
+
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" style="padding: 20px 30px 30px; font-family: 'Southwest Sans Light',  Trebuchet MS, Arial, Helvetica,  sans-serif; color: rgb(255, 255, 255); line-height: 18px; font-size: 14px;text-align:justify;">
+                                  <font size="12px" color="f6f6f6" style="font-family: 'Southwest Sans Light', Trebuchet MS, Helvetica,sans-serif; font-size: 12px;">
+                                    Confidentiality Notice: This e-mail message (including any attached or embedded documents) is intended for the exclusive and confidential use of the individual or entity to which this message is addressed, and unless otherwise expressly indicated, is confidential and privileged information of Lucas Buckels. Any dissemination, distribution or copying of the enclosed material is prohibited. If you receive this transmission in error, please notify me immediately by e-mail at
+                                    <a href="mailto:lucas.buckels@gmail.com" style="text-decoration:none;">
+                                      <span style="font-size: 12px; font-family: Southwest Sans Light, Trebuchet MS, Arial,  Helvetica, sans-serif; color: #ffbf27; font-variant-ligatures: normal; font-variant-east-asian: normal; font-variant-position: normal; text-decoration: underline; text-decoration-skip: none; vertical-align: baseline; white-space: pre-wrap;">lucas.buckels@gmail.com</span></a> and delete the original message. Your cooperation is appreciated.
+                                  </font>
+                                </td>
+                              </tr>
+
+                              <table align="center" border="0" cellpadding="0" cellspacing="0" class="contenttable" lang="x-content" width="600" style="max-width: 500px; width: 100%; text-size-adjust: 100%; border-collapse: collapse !important; position: relative;" cloneordelete="">
+                                <tbody>
+                                  <tr>
+                                    <td align="center" summary="hide" style="color: rgb(119, 119, 119); font-size: 13px; font-weight: 600; line-height: 18px; padding: 30px 0px 20px; text-size-adjust: 100%;">
+                                      <font color="ffffff" style="font-weight:600;text-size-adjust:100% !important;-webkit-text-size-adjust:100% !important;-ms-text-size-adjust:100% !important;font-family:'Southwest Sans', Arial Black, Arial Bold, Gadget, Trebuchet MS, Arial, Helvetica,sans-serif;">Having trouble viewing? <a href="https://codepen.io/lcsbckls/full/oNdYPGa" target="_blank" style="text-decoration:none;color:#9babe4;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">View this email in your <span style="border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:#9babe4;">browser.</span></a></font>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <!-- END Section 4 -->
+
+                        </td>
+                      </tr>
+                  </table>
+                  </body>
+
+                  </html>
+<!-- partial -->
+  
+</body>
+</html>
